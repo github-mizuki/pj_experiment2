@@ -1,0 +1,11 @@
+{{ user.username }}({{ user.email }}) 様
+
+pj_experiment2のアカウント仮登録を行っていただき、ありがとうございます。
+
+下記URLよりサイトにアクセスの上、引き続きアカウント登録をお願いいたします。
+まだ登録手続きは完了しておりませんので、ご注意ください。
+
+アカウント登録用 URL
+{{ protocol}}://{{ domain }}{% url 'accounts:activate_user' token %}
+
+pj_experiment2
