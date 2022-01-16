@@ -3,8 +3,7 @@ from .base import *
 
 DEBUG = False
 
-# ALLOWED_HOSTS = env.list('pro_ALLOWED_HOSTS')
-ALLOWED_HOSTS = ['45.76.97.82', 'localhost']
+ALLOWED_HOSTS = env.list('pro_ALLOWED_HOSTS')
 
 DATABASES = {
     'default': env.db(),
