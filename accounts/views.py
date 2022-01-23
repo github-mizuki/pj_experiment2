@@ -77,6 +77,5 @@ class UserLogoutView(View):
 
 def activate_user(request, token):
     user_activate_token = UserActivateTokens.objects.activate_user_by_token(token)
-    return render(
-        request, 'accounts/activate_user.html'
-    )
+    messages.info(request, "ユーザを有効化しました")
+    return redirect('accounts:user_login')
