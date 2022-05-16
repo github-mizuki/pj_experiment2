@@ -37,7 +37,7 @@
     </style>
 
     <!-- Custom styles for this template -->
-    
+
     <link href="{% static 'css/test.css' %}" rel="stylesheet">
   </head>
   {% load widget_tweaks %}
@@ -45,7 +45,7 @@
     <header>
       <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">pj_experiment</a>
+          <a class="navbar-brand" href="{% url 'task:task_home' %}">pj_experiment</a>
           <div>
             <button class="navbar-toggler pr-3 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -54,34 +54,34 @@
               <span class="navbar-toggler-icon"></span>
             </button>
           </div>
-      
+
           <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item active">
                 <a class="nav-link active" aria-current="page" href="{% url 'task:task_home' %}">タスクログ</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="#">通知</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">プロフィール</a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts:user_logout' %}">ログアウト</a>
               </li>
-              <li class="nav-item dropdown">
+              <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">設定</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown01">
                   <li><a class="dropdown-item" href="#">アクション</a></li>
                   <li><a class="dropdown-item" href="#">他のアクション</a></li>
                   <li><a class="dropdown-item" href="#">その他</a></li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
-            <form class="d-flex">
+            <!-- <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="検索" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </nav>

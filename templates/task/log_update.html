@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#{% url 'task:subtask_list' %}">
+            <a class="nav-link" href="{% url 'task:subtask_list' %}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-right"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
               サブタスク
             </a>
@@ -57,22 +57,29 @@
           <small>ログリスト　所属タスク変更</small>
         </div>
       </div>
-      <div>
-        <form method="post">
-            {% csrf_token %}
-            <div>
-              <div>
-                {{ object.create_at }}
-              </div>
-              <div>
-                {{ object.matter }}
-              </div>
-              <div class="form-group col-md-2">
-                {{ form.maintask | add_class:'form-control me-2' }}
-              </div>
-              <input class="btn btn-outline-success col-md-1" type="submit" id="submit" value="所属タスク変更">
-            </div>
-        </form>
+      <div class="row my-3">
+        <div class="col-12 col-xl-8">
+          <div class="w-100 list-group-item mb-1 rounded pt-3 pb-4">
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                  <div class="form-group col-md-7 mb-3">
+                    <label class="form-label">【投稿日時】</label>
+                    <p>{{ object.create_at }}</p>
+                  </div>
+                  <div class="form-group col-md-7 mb-3">
+                    <label class="form-label">【ログメッセージ】</label>
+                    <p>{{ object.matter }}</p>
+                  </div>
+                  <div class="form-group col-md-4 mb-3">
+                    <label class="form-label">【所属タスク】</label>
+                    {{ form.maintask | add_class:'form-select form-select-sm me-2' }}
+                  </div>
+                  <input class="btn btn-outline-success col-md-2 mt-3" type="submit" id="submit" value="所属タスク変更">
+                </div>
+            </form>
+          </div>
+        </div>
       </div>
       <footer class="pt-5 d-flex justify-content-between">
         <span class="text-muted">Copyright © 2021 <a href="https://pj-experiment.site/accounts/user_login">pj-experiment</a></span>

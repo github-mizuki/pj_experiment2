@@ -155,7 +155,7 @@
           <div class="card">
             <h5 class="card-header">
               サブタスク
-              <a href="{% url 'task:subtask_create' object.id %}" class="btn btn-success btn-sm py-0" tabindex="-1" role="button" aria-disabled="true">追加</a>
+              <a href="{% url 'task:subtask_add' object.id %}" class="btn btn-success btn-sm py-0" tabindex="-1" role="button" aria-disabled="true">追加</a>
             </h5>
             <div class="card-body">
                 <!-- subtask_setの存在判定で、else（False）を拾ってくれなかったため、subtaskはcontextに載せた。

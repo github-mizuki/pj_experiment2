@@ -7,7 +7,7 @@ import os
 from .models import MainTask, SubTask, Log
 from .forms import (
     LogCreateForm, MainTaskCreateForm, LogCreateForm2, LogUpdateForm, MainTaskUpdateForm,
-    SubTaskCreateForm, SubTaskUpdateForm
+    SubTaskAddForm, SubTaskUpdateForm, SubTaskCreateForm
 )
 from django.urls import reverse_lazy
 from datetime import datetime
@@ -29,7 +29,7 @@ class HomeView(LoginRequiredMixin, CreateView):
         context['logs'] = Log.objects.filter(user_id=self.request.user.id).order_by('-create_at')
         context['maintasks'] = MainTask.objects.filter(user_id=self.request.user.id, archive=False).order_by('deadline')
         return context
-    
+
     def get_form_kwargs(self):
         kwargs = super(HomeView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
@@ -181,10 +181,10 @@ class SubtaskListView(LoginRequiredMixin, ListView):
 
         return context
 
-class SubTaskCreateView(LoginRequiredMixin, CreateView):
-    template_name = os.path.join('task', 'subtask_create.html')
+class SubTaskAddView(LoginRequiredMixin, CreateView):
+    template_name = os.path.join('task', 'subtask_add.html')
     model = SubTask
-    form_class = SubTaskCreateForm
+    form_class = SubTaskAddForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -197,10 +197,38 @@ class SubTaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.maintask_id = self.kwargs['pk']
         form.instance.create_at = datetime.now()
         messages.info(self.request, f"サブタスク:<{post.title}>を新規作成しました。")
-        return super(SubTaskCreateView, self).form_valid(form)
-    
+        return super(SubTaskAddView, self).form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy('task:maintask_detail', kwargs={'pk': self.object.maintask_id})
+
+
+class SubTaskCreateView(LoginRequiredMixin, CreateView):
+    template_name = os.path.join('task', 'subtask_create.html')
+    model = SubTask
+    form_class = SubTaskCreateForm
+
+    def get_form_kwargs(self):
+        kwargs = super(SubTaskCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['object'] = get_object_or_404(MainTask, pk=self.kwargs['pk'])
+        context['maintasks'] = MainTask.objects.filter(
+            user_id=self.request.user.id, archive=False).order_by('deadline')
+        return context
+
+    def form_valid(self, form):
+        self.object = post = form.save(commit=False)
+        # form.instance.maintask_id = self.kwargs['pk']
+        form.instance.create_at = datetime.now()
+        messages.info(self.request, f"サブタスク:<{post.title}>を新規作成しました。")
+        return super(SubTaskCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('task:subtask_list')
 
 class SubTaskUpdateView(LoginRequiredMixin, UpdateView):
     template_name = os.path.join('task', 'subtask_update.html')
