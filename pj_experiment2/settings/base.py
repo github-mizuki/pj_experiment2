@@ -39,6 +39,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_URL = 'accounts:user_login'
+
 ROOT_URLCONF = 'pj_experiment2.urls'
 
 TEMPLATES = [
