@@ -13,3 +13,8 @@ body {
 .card-header {
   background-color: #bbb9c0;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
