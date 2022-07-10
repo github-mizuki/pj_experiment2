@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>HowToUse · pj_experiment</title>
+
+
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="{% static 'img/login_logo.png' %}" sizes="180x180">
+  <link rel="icon" href="{% static 'img/login_logo.png' %}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{% static 'img/login_logo.png' %}" sizes="16x16" type="image/png">
+  <link rel="manifest" href="{% static 'img/login_logo.png' %}">
+  <link rel="mask-icon" href="{% static 'img/login_logo.png' %}" color="#7952b3">
+  <link rel="icon" href="{% static 'img/login_logo.png' %}">
+  <meta name="theme-color" content="#7952b3">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    footer a {
+      color: #6c757d;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #0d6efd;
+      text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/howtouse.css' %}" rel="stylesheet">
+</head>
+{% load widget_tweaks %}
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'task:task_home' %}">pj_experiment</a>
+        <div>
+          <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'task:task_home' %}">タスクログ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'accounts:howtouse' %}">利用方法</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:user_logout' %}">ログアウト</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'accounts:howtouse' %}">利用方法</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:user_login' %}">ログイン</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:regist' %}">ユーザ登録</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="text-center mb-5">
+          <h1 class="mb-4">pj_experimentの使い方</h1>
+          <p>思いついた瞬間に書き留めておくことことのできる、投稿スタイルのメモ・タスク管理サービスです</p>
+        </div>
+        <div class="card mb-3">
+          <div class="card-header fw-bold">
+            1. 忘れる前に、ページトップのフォームから記録しておきたいことを投稿しましょう。
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>
+                仕事の進捗や日常のメモ取りといった用途にご利用ください。紐づけ先のタスクを選択しなくても投稿することができるので、
+                SNSのように「思い立った時に」「忘れる前に」「ササっと」記録を付けることができます。
+              </p>
+              <div class="text-center">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img1.png' %}">
+              </div>
+              <footer class="blockquote-footer">タスクを選択せずに投稿した場合、所属タスクは「None」として登録されます。</footer>
+              <footer class="blockquote-footer">タスクが作成されていれば、所属タスクを選択して投稿することができます。</footer>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-header fw-bold">
+            2. タスクを作成して、投稿したメモをタスクにグループ化しましょう。
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>
+                サイドメニュー（あるいはハンバーガーメニュー）から「メインタスク」へ進むことで、タスクを作成・編集することができます。
+              </p>
+              <div class="text-center">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img2.png' %}" width="80%" height="80%">
+              </div>
+              <p>
+                作成されたタスクには、これまで投稿してきた記録を後から紐づけることができます。当該タスクのメモだけがグループ化されるので、進捗履歴としても活用できます。
+                トップページの「最新ログ一覧」あるいはサイドメニューの「ログリスト」から、所属タスク名を選択することで紐づけ先のタスクを変更することができます。
+              </p>
+              <div class="text-center">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img3.png' %}">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img4.png' %}" width="60%" height="60%">
+              </div>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-header fw-bold">
+            3. サブタスクを使ってみましょう。
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>
+                タスクには往々にして細かなタスクが発生することもあるでしょう。そんな時はサブタスクをご利用ください。サイドバーから「サブタスク」を選択、あるいはタスク詳細画面から作成・編集することができます。
+              </p>
+              <div class="text-center">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img5.png' %}">
+              </div>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-header fw-bold">
+            4. 終了したタスクはアーカイブに移動させましょう。
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>
+                完了したメインタスクは詳細画面から「タスク完了」を行うことで、現行のタスクリストからアーカイブリストへと移動させることができます。定期的に発生する業務などはアーカイブから履歴を確認することで振り返りが容易くなります。
+              </p>
+              <div class="text-center">
+                <img class="mb-4" src="{% static 'img/pj-experiment_img6.png' %}" width="100%" height="100%">
+              </div>
+              <footer class="blockquote-footer">アーカイブ済みのタスクを再び現行のタスクリストに戻すこともできます。</footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <p class="mt-5 mb-3 text-muted">Copyright © 2021 <a
+            href="{% url 'accounts:user_login' %}">pj-experiment</a></p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -55,7 +55,7 @@ class RegistUserView(CreateView):
 class UserLoginView(FormView):
     template_name = os.path.join('accounts', 'user_login.html')
     form_class = UserLoginForm
-    
+
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
         password = request.POST['password']
@@ -66,7 +66,7 @@ class UserLoginView(FormView):
         else:
             messages.error(self.request, "アカウント認証に失敗しました。")
             return redirect('accounts:user_login')
-        
+
 
 class UserLogoutView(View):
 
@@ -79,3 +79,7 @@ def activate_user(request, token):
     user_activate_token = UserActivateTokens.objects.activate_user_by_token(token)
     messages.info(request, "ユーザを有効化しました")
     return redirect('accounts:user_login')
+
+
+class HowToUseView(TemplateView):
+    template_name = os.path.join('accounts', 'howtouse.html')
